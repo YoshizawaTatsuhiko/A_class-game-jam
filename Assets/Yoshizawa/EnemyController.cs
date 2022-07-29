@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] GameObject _player;
     [SerializeField] float _speed;
-    [SerializeField, Range(0f,180f)] float _searchAngle;
-    CircleCollider2D _circleCol;
     Vector3 _playerPos;
     Vector3 _enemyPos;
+    Rigidbody2D _rb;
     void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _enemyPos = transform.position;
     }
 
@@ -22,21 +23,16 @@ public class EnemyController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        var angle = Vector3.Angle(transform.up, _playerPos);
-
-        if(angle <= _searchAngle)
-        {
-            Debug.Log("!!!");
-            //colliderが反応してる間はプレイヤーを追尾する
-            Vector3 dir = (_playerPos - transform.position).normalized * _speed;
-            transform.Translate(dir);
-        }
+        Vector3 dir = (_playerPos - transform.position).normalized * _speed;
+        //transform.up = dir;
+        transform.Translate(dir);
+        //_rb.AddForce(dir,ForceMode2D.Impulse);
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
         //playerが見えなくなったら元のポジションに戻る
         Vector3 set = (_enemyPos - transform.position).normalized * _speed;
-        transform.Translate(set);
+        transform.up = set;
     }
 }
