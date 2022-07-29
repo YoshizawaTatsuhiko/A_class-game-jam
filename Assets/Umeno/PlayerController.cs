@@ -8,14 +8,14 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] int _moveSpeed;
     [SerializeField] int _hp;
-    //[SerializeField] BoxCollider2D _bc;
-    //[SerializeField] GameObject[] _enemyPosition;
+    [SerializeField] BoxCollider2D _bc;
+    [SerializeField] GameObject[] _enemyPosition;
     [SerializeField] float _meleeattack;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _muzzlPosition;
     [SerializeField] GameObject _cursorPosition;
     [SerializeField] Text _HPtext;
-   //GameObject closeEnemy;
+    GameObject closeEnemy;
     Rigidbody2D _rb;
 
     void Start()
@@ -35,32 +35,24 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("Gameover");
         }
-        //_enemyPosition = GameObject.FindGameObjectsWithTag("Enemy");
-
-        //float closeDist = 1000;
-
-        //foreach (GameObject t in _enemyPosition)
-        //{
-        //    print(Vector3.Distance(transform.position, t.transform.position));
-        //    float tDist = Vector3.Distance(transform.position, t.transform.position);
-
-        //    if (closeDist > tDist)
-        //    {
-        //        closeDist = tDist;
-        //        closeEnemy = t;
-        //    }
-        //}
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(_bulletPrefab, _muzzlPosition.position, transform.rotation);
+            Debug.Log("ãﬂê⁄çUåÇ");
+            StartCoroutine(PlayerAttack());
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             _hp--;
         }
+    }
+    IEnumerator PlayerAttack()
+    {
+        _bc.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        _bc.enabled = false;
     }
 }

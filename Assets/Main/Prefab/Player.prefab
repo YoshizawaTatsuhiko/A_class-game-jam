@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1593515847825499619}
   - component: {fileID: 1593515847825499620}
   - component: {fileID: 1593515847825499621}
-  - component: {fileID: 1593515847825499618}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -155,32 +154,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 2167917786109865486, guid: ad280228bf0517d4cb5420611392b03e, type: 3}
   _muzzlPosition: {fileID: 1593515849112301751}
   _cursorPosition: {fileID: 0}
---- !u!61 &1593515847825499618
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593515847825499624}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.8}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.64}
-  m_EdgeRadius: 0
+  _HPtext: {fileID: 0}
 --- !u!1 &1593515847892486289
 GameObject:
   m_ObjectHideFlags: 0
