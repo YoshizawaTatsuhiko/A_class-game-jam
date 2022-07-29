@@ -6,78 +6,53 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] int _moveSpeed;
     [SerializeField] int _hp;
-    [SerializeField] BoxCollider2D _bc;
-    [SerializeField] Vector2 _enemyPosition;
+    //[SerializeField] BoxCollider2D _bc;
+    //[SerializeField] GameObject[] _enemyPosition;
     [SerializeField] float _meleeattack;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _muzzlPosition;
-    [SerializeField] Transform _cursorPosition;
+    [SerializeField] GameObject _cursorPosition;
+   //GameObject closeEnemy;
     Rigidbody2D _rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float X = Input.GetAxisRaw("Horizontal");
         float Y = Input.GetAxisRaw("Vertical");
-        //Vector2 dir = _cursorPosition - transform.position;
-        //Flip(X, Y);
+        Vector2 dir = _cursorPosition.transform.position - transform.position;
+        transform.up = dir;
         _rb.velocity = new Vector2(X * _moveSpeed, Y * _moveSpeed);
-        float distance = Vector2.Distance(transform.position, _enemyPosition);
+        //_enemyPosition = GameObject.FindGameObjectsWithTag("Enemy");
+
+        //float closeDist = 1000;
+
+        //foreach (GameObject t in _enemyPosition)
+        //{
+        //    print(Vector3.Distance(transform.position, t.transform.position));
+        //    float tDist = Vector3.Distance(transform.position, t.transform.position);
+
+        //    if (closeDist > tDist)
+        //    {
+        //        closeDist = tDist;
+        //        closeEnemy = t;
+        //    }
+        //}
+
         if (Input.GetButtonDown("Fire1"))
         {
-            if(distance <= _meleeattack)
-            {
-                _bc.enabled = true;
-            }
-            else
-            {
-                Instantiate(_bulletPrefab, _muzzlPosition);
-            }
+            Instantiate(_bulletPrefab, _muzzlPosition.position, transform.rotation);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Bullet")
-        {
-            _hp--;
-            Destroy(collision.gameObject);
-        }
         if(collision.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            _hp--;
         }
-    }
-    
-    void Flip(float H, float V)
-    {
-        //float D2 = H * H + V * V;
-        //Vector3 PlayerRotation = new Vector3(0, 0, 1);
-        //transform.rotation = Quaternion.Euler(PlayerRotation * D2);
-        //if(H > 0 && V == 0)
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, 0);
-        //}
-        //else if (H < 0 && V ==0)
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, 180);
-        //}
-        //else if (V > 0 && H == 0)
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, 270);
-        //}
-        //else if (V < 0 && H == 0)
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, 90);
-        //}
-        //else if (V > 0 && H > 0)
-        //{
-        //    transform.rotation = Quaternion.Euler(0, 0, 320);
-        //}
     }
 }
