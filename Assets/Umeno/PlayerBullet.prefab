@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3360516407558096383}
   - component: {fileID: 3961960641547379328}
   - component: {fileID: 8396843778570409791}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2167917787495610496}
   - component: {fileID: 2167917787495610497}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

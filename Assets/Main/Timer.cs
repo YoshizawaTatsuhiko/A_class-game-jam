@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _timetext = gameObject.GetComponent<Text>();
+        
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
     {
         _time = Time.deltaTime;
         _totaltime -= _time;
-        _timetext.text = $"{_totaltime.ToString("f2")}";
+        _timetext.text = $"{_totaltime.ToString("f2")}•b";
         if (_totaltime < 0)
         {
             SceneManager.LoadScene("Gameover");

@@ -5,34 +5,43 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] GameObject _player;
+    GameObject _player;
     [SerializeField] float _speed;
+    [SerializeField] int _hp;
     Vector3 _playerPos;
-    Vector3 _enemyPos;
-    Rigidbody2D _rb;
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _enemyPos = transform.position;
+        _player = GameObject.Find("Player");
     }
 
     void Update()
     {
         _playerPos = _player.transform.position;
-    }
-
-    void OnTriggerStay2D(Collider2D collision)
-    {
         Vector3 dir = (_playerPos - transform.position).normalized * _speed;
-        //transform.up = dir;
         transform.Translate(dir);
-        //_rb.AddForce(dir,ForceMode2D.Impulse);
+        if(_hp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //playerが見えなくなったら元のポジションに戻る
-        Vector3 set = (_enemyPos - transform.position).normalized * _speed;
-        transform.up = set;
+        if(collision.tag == "Bullet")
+        {
+            _hp--;
+        }
     }
+    //void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    Vector3 dir = (_playerPos - transform.position).normalized * _speed;
+    //    transform.Translate(dir);
+    //}
+
+    //void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    //playerが見えなくなったら元のポジションに戻る
+    //    Vector3 set = (_enemyPos - transform.position).normalized * _speed;
+    //    transform.Translate(set);
+    //}
 }

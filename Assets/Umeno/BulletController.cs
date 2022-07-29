@@ -18,4 +18,11 @@ public class BulletController : MonoBehaviour
     {
         
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.tag == "Finish")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
