@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] int _moveSpeed;
     [SerializeField] int _hp;
-    [SerializeField] BoxCollider2D _bc;
+    [SerializeField] GameObject _blade;
     [SerializeField] GameObject[] _enemyPosition;
     [SerializeField] float _meleeattack;
     [SerializeField] GameObject _bulletPrefab;
@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator PlayerAttack()
     {
-        _bc.enabled = true;
-        yield return new WaitForSeconds(0.5f);
-        _bc.enabled = false;
+        _blade.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        _blade.gameObject.SetActive(false);
     }
 }
