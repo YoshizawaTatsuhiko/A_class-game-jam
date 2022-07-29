@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _muzzlPosition;
     [SerializeField] GameObject _cursorPosition;
+    [SerializeField] Text _HPtext;
    //GameObject closeEnemy;
     Rigidbody2D _rb;
 
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
         float Y = Input.GetAxisRaw("Vertical");
         Vector2 dir = _cursorPosition.transform.position - transform.position;
         transform.up = dir;
+        _HPtext.text = $"HP:{_hp}";
         _rb.velocity = new Vector2(X * _moveSpeed, Y * _moveSpeed);
         if(_hp <= 0)
         {
