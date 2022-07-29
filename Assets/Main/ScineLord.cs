@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class ScineLord : MonoBehaviour
 {
+    [SerializeField] GameObject _game;
+    [SerializeField] GameObject _game1;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +22,13 @@ public class ScineLord : MonoBehaviour
     public void scenelord(string scenename)
     {
         SceneManager.LoadScene(scenename);
+    }
+    public void SwtchLight()
+    {
+        if(_game && _game1)
+        {
+            _game.SetActive(false);
+            _game1.SetActive(true);
+        }
     }
 }
