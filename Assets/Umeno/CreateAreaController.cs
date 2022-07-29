@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class CreateAreaController : MonoBehaviour
 {
-    [SerializeField] int _bulletSpeed;
-    Rigidbody2D _rb;
+    [SerializeField] GameObject _enemy;
+    CircleCollider2D _cc;
     // Start is called before the first frame update
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _rb.velocity = transform.up * _bulletSpeed;
+        _cc = GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
