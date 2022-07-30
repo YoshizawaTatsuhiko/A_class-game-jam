@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     GameObject _gameManager;
     Vector3 _playerPos;
     int _score = 1;
+    float _timer;
     void Start()
     {
         _player = GameObject.Find("Player");
@@ -22,6 +23,11 @@ public class EnemyController : MonoBehaviour
     {
         _playerPos = _player.transform.position;
         Vector3 dir = (_playerPos - transform.position).normalized * _speed;
+        _timer += Time.deltaTime;
+        if(_timer >= 30)
+        {
+            _speed = 0.4f;
+        }
         transform.Translate(dir);
         if(_hp <= 0)
         {
