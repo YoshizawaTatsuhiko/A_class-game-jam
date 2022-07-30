@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     GameObject _player;
     [SerializeField] float _speed;
     [SerializeField] int _hp;
+    [SerializeField] GameObject _destroyEffect;
     GameObject _gameManager;
     Vector3 _playerPos;
     int _score = 1;
@@ -27,7 +28,10 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    private void OnDestroy()
+    {
+        Instantiate(_destroyEffect, transform.position, transform.rotation);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //if(collision.tag == "Bullet")
