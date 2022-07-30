@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     [SerializeField] float _totaltime;
-    [SerializeField] PlayreState _state = PlayreState.Noamal;
+    [SerializeField]PlayreState _state = PlayreState.Noamal;
     float _time;
     [SerializeField] Text _timetext;
     public int _score;
@@ -27,12 +27,16 @@ public class Timer : MonoBehaviour
             {
                 _timetext.text = $"{_totaltime.ToString("f2")}•b";
             }
+            if(_totaltime <= 0)
+            {
+                _state = PlayreState.Timer0;
+                SceneManager.LoadScene("Gameover");
+            }
         }
-        if (_totaltime < 0)
+        else if(_state == PlayreState.Timer0)
         {
-            SceneManager.LoadScene("Gameover");
-            _state = PlayreState.Timer0;
-            _totaltime = 0;
+            //SceneManager.LoadScene("Gameover");
+            _totaltime = 999999f;
         }
     }
     public void AddScore(int Score)
@@ -45,4 +49,6 @@ enum PlayreState
     Noamal,
 
     Timer0,
+
+    Hold,
 }

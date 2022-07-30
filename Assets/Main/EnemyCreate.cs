@@ -8,7 +8,9 @@ public class EnemyCreate : MonoBehaviour
     [SerializeField] GameObject _enemy;
     BoxCollider2D _boxc;
     [SerializeField] float _totaltime;
-    public float _time;
+    [SerializeField] float _finalIntarval;
+    float _time;
+    float _count;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,11 @@ public class EnemyCreate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _count += Time.deltaTime;
+        if(_count >= 40)
+        {
+            _totaltime = _finalIntarval;
+        }
         _time += Time.deltaTime;
         float _X = Random.Range((-_boxc.size.x) / 2,(_boxc.size.x)/2);
         float _y = Random.Range((-_boxc.size.y) / 2,(_boxc.size.y)/ 2);
