@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _muzzlPosition;
     [SerializeField] GameObject _cursorPosition;
     [SerializeField] Text _HPtext;
+    Vector3 _playerPosition;
     int _dathSkillCount = 1;
     Rigidbody2D _rb;
     float _timer;
@@ -34,11 +35,18 @@ public class PlayerController : MonoBehaviour
         float X = Input.GetAxisRaw("Horizontal");
         float Y = Input.GetAxisRaw("Vertical");
         _timer += Time.deltaTime;
-        //Vector3 _a = new Vector3(X, Y, 0);
-        //Vector2 dir = _a - transform.position;
-        //Vector2 dir = _cursorPosition.transform.position - transform.position;
         Vector2 dir = new Vector2(X, Y);
         transform.up = dir;
+        //Vector3 dir = transform.position - _playerPosition;
+        //_playerPosition = transform.position;
+        //Vector3 dir = transform.position;
+        //if(dir.magnitude > 0.1f)
+        //{
+        //    Debug.Log("ƒ|ƒWƒVƒ‡ƒ“•Û‘¶");
+
+        //    _playerPosition = new Vector2(X, Y);
+        //    //transform.rotation = Quaternion.AngleAxis(1f, dir);
+        //}
         _HPtext.text = $"HP:{_hp}";
         _rb.velocity = new Vector2(X * _moveSpeed, Y * _moveSpeed);
         if(_hp <= 0)
