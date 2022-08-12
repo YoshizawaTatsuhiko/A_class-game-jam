@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform _muzzlPosition;
     [SerializeField] GameObject _cursorPosition;
     [SerializeField] Text _HPtext;
+    [SerializeField] Text _dsCountText;
+    [SerializeField] Text _sCountText;
+    bool _isCircle;
+    int _sCount;
     Vector3 _playerPosition;
     int _dathSkillCount = 1;
     Rigidbody2D _rb;
@@ -36,7 +40,10 @@ public class PlayerController : MonoBehaviour
         float Y = Input.GetAxisRaw("Vertical");
         _timer += Time.deltaTime;
         Vector2 dir = new Vector2(X, Y);
-        transform.up = dir;
+        if(dir.magnitude != 0)
+        {
+            transform.up = dir;
+        }
         //Vector3 dir = transform.position - _playerPosition;
         //_playerPosition = transform.position;
         //Vector3 dir = transform.position;
@@ -48,6 +55,8 @@ public class PlayerController : MonoBehaviour
         //    //transform.rotation = Quaternion.AngleAxis(1f, dir);
         //}
         _HPtext.text = $"HP:{_hp}";
+        _dsCountText.text = $"使用可能回数:{_dathSkillCount}";
+        _sCountText.text = $"使用可能回数:{_sCount}";
         _rb.velocity = new Vector2(X * _moveSpeed, Y * _moveSpeed);
         if(_hp <= 0)
         {
@@ -60,17 +69,20 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PlayerAttackBlead());
             _bladeAudio.Play();
         }
-        if(_timer >= 5)
+        if(_timer >= 5 && _isCircle == false)
         {
-            if (Input.GetButtonDown("Fire2"))
-            {
-                Debug.Log("全体攻撃");
-                StartCoroutine(PlayerAttackCircle());
-                _circleAudio.Play();
-                _timer = 0;
-            }
+            _sCount = 1;
+            _isCircle = true;
         }
-        if(_dathSkillCount == 1)
+        if (Input.GetButtonDown("Fire2") && _isCircle)
+        {
+            Debug.Log("全体攻撃");
+            StartCoroutine(PlayerAttackCircle());
+            _circleAudio.Play();
+            _timer = 0;
+            _sCount = 0;
+        }
+        if (_dathSkillCount == 1)
         {
             if(Input.GetButtonDown("Fire3"))
             {

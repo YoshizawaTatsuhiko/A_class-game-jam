@@ -22,11 +22,11 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         _playerPos = _player.transform.position;
-        Vector3 dir = (_playerPos - transform.position).normalized * _speed;
+        Vector3 dir = (_playerPos - transform.position).normalized * _speed * Time.deltaTime;
         _timer += Time.deltaTime;
         if(_timer >= 30)
         {
-            _speed = 0.4f;
+            _speed = 5f;
         }
         transform.Translate(dir);
         if(_hp <= 0)
