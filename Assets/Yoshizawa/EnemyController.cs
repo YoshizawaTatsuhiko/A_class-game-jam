@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] int _hp;
     [SerializeField] GameObject _destroyEffect;
+    [SerializeField] CircleCollider2D _col;
+    Rigidbody2D _rb;
     GameObject _gameManager;
     Vector3 _playerPos;
     int _score = 1;
@@ -17,38 +19,35 @@ public class EnemyController : MonoBehaviour
     {
         _player = GameObject.Find("Player");
         _gameManager = GameObject.Find("GameManager");
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         _playerPos = _player.transform.position;
-        Vector3 dir = (_playerPos - transform.position).normalized * _speed * Time.deltaTime;
+        //Vector3 dir = (_playerPos - transform.position).normalized * _speed * Time.deltaTime;
+        //transform.Translate(dir);
+        _rb.velocity = (_playerPos - transform.position).normalized * _speed;
         _timer += Time.deltaTime;
         if(_timer >= 30)
         {
             _speed = 5f;
         }
-        transform.Translate(dir);
-        if(_hp <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-    private void OnDestroy()
-    {
-        Instantiate(_destroyEffect, transform.position, transform.rotation);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if(collision.tag == "Bullet")
-        //{
-        //    _hp--;
-        //}
         if(collision.tag == "Slash")
         {
             var GM = _gameManager.GetComponent<Timer>();
             GM.AddScore(_score);
-            _hp -= 5;
+            _col.enabled = false;
+            StartCoroutine(EnemyDestroy());
         }
+    }
+    IEnumerator EnemyDestroy()
+    {
+        Instantiate(_destroyEffect, transform.position, transform.rotation);
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
 }

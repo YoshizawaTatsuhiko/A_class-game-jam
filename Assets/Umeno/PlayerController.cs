@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Text _HPtext;
     [SerializeField] Text _dsCountText;
     [SerializeField] Text _sCountText;
+    [SerializeField] ParticleSystem _chageEffect;
     bool _isCircle;
     int _sCount;
     Vector3 _playerPosition;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
         if(_timer >= 5 && _isCircle == false)
         {
             _sCount = 1;
+            _chageEffect.Play();
             _isCircle = true;
         }
         if (Input.GetButtonDown("Fire2") && _isCircle)
