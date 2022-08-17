@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
             _circleAudio.Play();
             _timer = 0;
             _sCount = 0;
+            _isCircle = false;
         }
         if (_dathSkillCount == 1)
         {
