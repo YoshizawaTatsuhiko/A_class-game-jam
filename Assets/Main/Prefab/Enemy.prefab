@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 373808707078716644}
   - component: {fileID: 373808707078716642}
   - component: {fileID: 373808707078716441}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -118,6 +118,7 @@ MonoBehaviour:
   _speed: 3
   _hp: 5
   _destroyEffect: {fileID: 4897106891025130401, guid: a46f18541664361468d80a462b3ba541, type: 3}
+  _col: {fileID: 373808707078716644}
 --- !u!50 &373808707078716441
 Rigidbody2D:
   serializedVersion: 4
