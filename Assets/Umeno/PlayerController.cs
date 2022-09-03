@@ -36,7 +36,10 @@ public class PlayerController : MonoBehaviour
         float Y = Input.GetAxisRaw("Vertical");
         _timer += Time.deltaTime;
         Vector2 dir = new Vector2(X, Y);
-        transform.up = dir;
+        if (dir != Vector2.zero)
+        {
+            transform.up = dir;
+        }
         //Vector3 dir = transform.position - _playerPosition;
         //_playerPosition = transform.position;
         //Vector3 dir = transform.position;

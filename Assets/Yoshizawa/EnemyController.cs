@@ -22,14 +22,14 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         _playerPos = _player.transform.position;
-        Vector3 dir = (_playerPos - transform.position).normalized * _speed;
+        Vector3 dir = (_playerPos - transform.position).normalized * _speed * Time.deltaTime;
         _timer += Time.deltaTime;
-        if(_timer >= 30)
+        if (_timer >= 30)
         {
             _speed = 0.4f;
         }
         transform.Translate(dir);
-        if(_hp <= 0)
+        if (_hp <= 0)
         {
             Destroy(gameObject);
         }
@@ -44,7 +44,7 @@ public class EnemyController : MonoBehaviour
         //{
         //    _hp--;
         //}
-        if(collision.tag == "Slash")
+        if (collision.tag == "Slash")
         {
             var GM = _gameManager.GetComponent<Timer>();
             GM.AddScore(_score);
